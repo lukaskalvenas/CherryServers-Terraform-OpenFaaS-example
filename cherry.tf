@@ -59,7 +59,7 @@ resource "cherryservers_server" "serverless-master-server" {
       }
     }
 }
-################ Worker server #1 ################
+################ Worker server ################
 resource "cherryservers_server" "serverless-worker-server" {
     count = 3
     project_id = "${cherryservers_project.serverless_project.id}"
