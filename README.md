@@ -75,3 +75,4 @@ Good luck!
 ```
 ./terraform destroy
 ```
+Keep in mind that all Docker swarm members will be terminated and the data will get permanently wiped.
