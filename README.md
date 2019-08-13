@@ -59,7 +59,7 @@ resource "cherryservers_server" "serverless-worker-server" {
 ./terraform plan
 ./terraform apply
 ```
-In case you need detailed deploy/destroy output, execute the "export TF_LOG=trace" command.
+In case you need detailed deploy/destroy output, execute the "export TF_LOG=trace" command on the working terminal session.
 
 The full process may take up to 20 minutes to complete.
 
