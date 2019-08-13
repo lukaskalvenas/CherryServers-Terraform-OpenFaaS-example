@@ -46,6 +46,13 @@ variable "public_key" {
   default = "~/.ssh/id_rsa.pub"
 }
 ```
+To set the worker count, edit the 64th line in the "cherry.tf" file:
+```
+################ Worker server ################
+resource "cherryservers_server" "serverless-worker-server" {
+    <b>count = 3</b>
+.....
+```
 # How to use
 ```
 ./terraform init
