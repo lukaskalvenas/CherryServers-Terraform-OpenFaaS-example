@@ -1,2 +1,57 @@
+![Cherry Servers](https://www.serchen.com/images/thumbnails/large/54097.jpg)![Terraform](https://files.readme.io/4e22f93-terraform.png) 
 # CherryServers-Terraform-OpenFaaS-example
-Terraform template to automatically deploy OpenFaaS with Docker Swarm on Cherryservers infrastructure
+This example will use Ubuntu as the base operating system to deploy one master node and a user-specified amount (e.g. two) worker nodes. Those will then automatically join the master node via public IP address and token combination. 
+# Prerequisites
+<ul>
+  <li><a href="https://docs.docker.com/install/linux/docker-ce/ubuntu/" target="_blank">Docker CE</a></li>
+  <li><a href="https://www.terraform.io/downloads.html" target="_blank">Terraform 0.12.6</a></li>
+  <li><a href="http://downloads.cherryservers.com/other/terraform/" target="_blank">CherryServers Terraform module</a></li>
+  <li><a href="https://stedolan.github.io/jq/download/" target="_blank">JQ package for the host PC/laptop</a></li>
+</ul>
+
+# Before you start
+You will need a <a href="https://portal.cherryservers.com" target="_blank">cherrservers account</a> with the credit in balance to order services with hourly billing. 
+
+Create API key <a href="https://portal.cherryservers.com/#/settings/api-keys/" target="_blank">https://portal.cherryservers.com/#/settings/api-keys/</a> and enter it to "cherry.tf" file:<br>
+```
+provider "cherryservers" { 
+     auth_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9"
+}
+```
+The "variables.tf" file is self explanatory and should be edit accordingly:
+```
+# User Variables
+variable "region" {
+  default = "EU-East-1"
+}
+variable "image" {
+  default = "Ubuntu 16.04 64bit"
+}
+variable "project_name" {
+  default = "ServerlessProject1"
+}
+variable "team_id" {
+  default = "11682"
+}
+variable "plan_id" {
+  default = "94"
+}
+variable "private_key" {
+  default = "~/.ssh/id_rsa"
+}
+variable "public_key" {
+  default = "~/.ssh/id_rsa.pub"
+}
+```
+# How to use
+```
+./terraform init
+./terraform plan
+./terraform apply
+```
+In case you need detailed deploy/destroy output, execute the "export TF_LOG=trace" command.
+
+# When no longer needed
+```
+./terraform destroy
+```
