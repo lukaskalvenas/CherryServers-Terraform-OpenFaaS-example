@@ -50,7 +50,7 @@ To set the worker count, edit the 64th line in the "cherry.tf" file:
 ```
 ################ Worker server ################
 resource "cherryservers_server" "serverless-worker-server" {
-    <b>count = 3</b>
+    count = 3
 .....
 ```
 # How to use
