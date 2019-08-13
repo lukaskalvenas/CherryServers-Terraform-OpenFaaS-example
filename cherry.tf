@@ -9,7 +9,7 @@ resource "cherryservers_project" "serverless_project" {
 
 resource "cherryservers_ssh" "lukas" {
     name = "lukas"
-    public_key = "${file("/home/lukas/.ssh/id_rsa.pub")}"
+    public_key = file(var.public_key)
 }
 
 ################ Master server creation ################
@@ -30,7 +30,7 @@ resource "cherryservers_server" "serverless-master-server" {
         type = "ssh"
         user = "root"
         host = "${cherryservers_server.serverless-master-server.primary_ip}"
-        private_key = "${file("/home/lukas/.ssh/id_rsa")}"
+        private_key = file(var.private_key)
       }
     }
 
@@ -41,7 +41,7 @@ resource "cherryservers_server" "serverless-master-server" {
         type = "ssh"
         user = "root"
         host = "${cherryservers_server.serverless-master-server.primary_ip}"
-        private_key = "${file("/home/lukas/.ssh/id_rsa")}"
+        private_key = file(var.private_key)
       }
     }
 
@@ -55,11 +55,11 @@ resource "cherryservers_server" "serverless-master-server" {
         type = "ssh"
         user = "root"
         host = "${cherryservers_server.serverless-master-server.primary_ip}"
-        private_key = "${file("/home/lukas/.ssh/id_rsa")}"
+        private_key = file(var.private_key)
       }
     }
 }
-################ Worker server  ################
+################ Worker server #1 ################
 resource "cherryservers_server" "serverless-worker-server" {
     count = 3
     project_id = "${cherryservers_project.serverless_project.id}"
@@ -72,7 +72,7 @@ resource "cherryservers_server" "serverless-worker-server" {
       type = "ssh"
       user = "root"
       host = "${cherryservers_server.serverless-worker-server.primary_ip}"
-      private_key = "${file("/home/lukas/.ssh/id_rsa")}"
+      private_key = file(var.private_key)
     }
     provisioner "remote-exec" {
       script = "install-docker.sh"
@@ -81,7 +81,7 @@ resource "cherryservers_server" "serverless-worker-server" {
       type = "ssh"
       user = "root"
       host = "${self.primary_ip}"
-      private_key = "${file("/home/lukas/.ssh/id_rsa")}"
+      private_key = file(var.private_key)
     }
     }
     provisioner  "remote-exec" {
@@ -93,7 +93,7 @@ resource "cherryservers_server" "serverless-worker-server" {
        type = "ssh"
        user = "root"
        host = "${self.primary_ip}"
-       private_key = "${file("/home/lukas/.ssh/id_rsa")}"
+       private_key = file(var.private_key)
     }
     }
    
