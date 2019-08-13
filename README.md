@@ -18,6 +18,10 @@ provider "cherryservers" {
      auth_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9"
 }
 ```
+# Important
+
+There've been situations where applying the API key directly into the ".tf" file was not detected by the Cherry Servers API, so in that case you may need to manually export the API key using "export CHERRY_AUTH_TOKEN="API_key" command.
+
 The "variables.tf" file is self explanatory and should be edit accordingly:
 ```
 # User Variables
