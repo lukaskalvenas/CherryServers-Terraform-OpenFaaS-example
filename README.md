@@ -69,6 +69,8 @@ The worker servers will then be automatically added to the Docker swarm. When th
 
 This will install the default OpenFaaS function stack for you. Use the provided login credentials to access the master GUI control panel at http://$master_ip:8080 and begin working.
 
+Good luck.
+
 # When no longer needed
 ```
 ./terraform destroy
