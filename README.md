@@ -3,7 +3,6 @@
 This example will use Ubuntu as the base operating system to deploy one master node and a user-specified amount (e.g. two) worker nodes. Those will then automatically join the master node via public IP address and token combination. 
 # Prerequisites
 <ul>
-  <li><a href="https://docs.docker.com/install/linux/docker-ce/ubuntu/" target="_blank">Docker CE</a></li>
   <li><a href="https://www.terraform.io/downloads.html" target="_blank">Terraform 0.12.6</a></li>
   <li><a href="http://downloads.cherryservers.com/other/terraform/" target="_blank">CherryServers Terraform module</a></li>
   <li><a href="https://stedolan.github.io/jq/download/" target="_blank">JQ package for the host PC/laptop</a></li>
