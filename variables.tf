@@ -6,7 +6,7 @@ variable "image" {
   default = "Ubuntu 16.04 64bit"
 }
 variable "project_name" {
-  default = "ServerlessProject1"
+  default = "OpenFaaSProject1"
 }
 variable "team_id" {
   default = "11682"
