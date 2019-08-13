@@ -1,4 +1,4 @@
-![Cherry Servers](https://www.serchen.com/images/thumbnails/large/54097.jpg)![Terraform](https://files.readme.io/4e22f93-terraform.png) 
+![Cherry Servers](https://www.serchen.com/images/thumbnails/large/54097.jpg) 
 # CherryServers-Terraform-OpenFaaS-example
 This example will use Ubuntu as the base operating system to deploy one master node and a user-specified amount (e.g. two) worker nodes. Those will then automatically join the master node via public IP address and token combination. 
 # Prerequisites
