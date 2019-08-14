@@ -54,6 +54,7 @@ Last, but not least, make sure that all bash scripts in the Terraform working di
 
 ```
 sudo chmod +x *.sh
+sudo chmod +x terraform-provider-cherryservers
 ```
 
 # Important
