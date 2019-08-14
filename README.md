@@ -18,7 +18,7 @@ provider "cherryservers" {
 }
 ```
 
-The "variables.tf" file is self explanatory and should be edited accordingly:
+The "variables.tf" file is self explanatory and should be edited accordingly. Download and run the <a href="https://github.com/cherryservers/cherryctl" target="_blank">cherryctl</a> script to get a list of server plan IDs.
 ```
 # User Variables
 variable "region" {
@@ -58,8 +58,7 @@ sudo chmod +x *.sh
 
 # Important
 
-There've been situations where applying the API key directly into the ".tf" file was not detected by the Cherry Servers API, so in that case you may need to manually export the API key using "export CHERRY_AUTH_TOKEN="API_key" command. Download and run the <a href="https://github.com/cherryservers/cherryctl" target="_blank">cherryctl</a> script to get a list of server plan IDs.
-
+There've been situations where applying the API key directly into the ".tf" file was not detected by the Cherry Servers API, so in that case you may need to manually export the API key using "export CHERRY_AUTH_TOKEN="API_key" command. 
 
 # How to use
 
