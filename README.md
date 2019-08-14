@@ -17,9 +17,6 @@ provider "cherryservers" {
      auth_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9"
 }
 ```
-# Important
-
-There've been situations where applying the API key directly into the ".tf" file was not detected by the Cherry Servers API, so in that case you may need to manually export the API key using "export CHERRY_AUTH_TOKEN="API_key" command. Download and run the <a href="https://github.com/cherryservers/cherryctl" target="_blank">cherryctl</a> script to get a list of server plan IDs.
 
 The "variables.tf" file is self explanatory and should be edited accordingly:
 ```
@@ -46,13 +43,24 @@ variable "public_key" {
   default = "~/.ssh/id_rsa.pub"
 }
 ```
-To set the worker count, edit the 64th line in the "cherry.tf" file:
+To set the worker count, edit the following line in the "cherry.tf" file:
 ```
 ################ Worker server ################
 resource "cherryservers_server" "serverless-worker-server" {
     count = 3
 .....
 ```
+Last, but not least, make sure that all bash scripts in the Terraform working directory have an "execute" flag:
+
+```
+sudo chmod +x *.sh
+```
+
+# Important
+
+There've been situations where applying the API key directly into the ".tf" file was not detected by the Cherry Servers API, so in that case you may need to manually export the API key using "export CHERRY_AUTH_TOKEN="API_key" command. Download and run the <a href="https://github.com/cherryservers/cherryctl" target="_blank">cherryctl</a> script to get a list of server plan IDs.
+
+
 # How to use
 
 First and foremost, make sure that both "terraform" main script and CherryServers terraform module files are present in the working directory. 
