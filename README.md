@@ -54,6 +54,9 @@ resource "cherryservers_server" "serverless-worker-server" {
 .....
 ```
 # How to use
+
+First and foremost, make sure that both "terraform" main script and CherryServers terraform module files are present in the working directory. 
+
 ```
 ./terraform init
 ./terraform plan
