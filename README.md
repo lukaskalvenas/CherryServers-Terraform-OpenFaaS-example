@@ -4,7 +4,7 @@ This example will use Ubuntu as the base operating system to deploy one master n
 # Prerequisites
 <ul>
   <li><a href="https://www.terraform.io/downloads.html" target="_blank">Terraform 0.12.6</a></li>
-  <li><a href="http://downloads.cherryservers.com/other/terraform/" target="_blank">CherryServers Terraform module</a></li>
+  <li><a href="http://downloads.cherryservers.com/other/terraform/" target="_blank">CherryServers Terraform module</a> Copy it to the working Terraform directory.</li>
   <li><a href="https://stedolan.github.io/jq/download/" target="_blank">JQ package for the host PC/laptop</a></li>
 </ul>
 
