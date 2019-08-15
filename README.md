@@ -50,12 +50,13 @@ resource "cherryservers_server" "serverless-worker-server" {
     count = 3
 .....
 ```
-Last, but not least, make sure that all bash scripts in the Terraform working directory have an "execute" flag:
+Make sure that all bash scripts in the Terraform working directory have an "execute" flag:
 
 ```
 sudo chmod +x *.sh
 sudo chmod +x terraform-provider-cherryservers
 ```
+Last, but not least, check https://portal.cherryservers.com/#/settings/ssh-keys if you don't alredy have an SSH key with the same tag (name) uploaded or if there isn't already a project with the same name created at https://portal.cherryservers.com/#/projects, in which case Terraform will not beging running. Delete the current SSH key and the duplicated project from the client portal first and then proceed.
 
 # Important
 
@@ -67,7 +68,6 @@ First and foremost, make sure that both "terraform" main script and CherryServer
 
 ```
 ./terraform init
-./terraform plan
 ./terraform apply
 ```
 In case you need detailed deploy/destroy output, execute the "export TF_LOG=trace" command on the working terminal session.
