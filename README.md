@@ -60,7 +60,7 @@ Last, but not least, check https://portal.cherryservers.com/#/settings/ssh-keys 
 
 # Important
 
-There've been situations where applying the API key directly into the ".tf" file was not detected by the Cherry Servers API, so in that case you may need to manually export the API key using "export CHERRY_AUTH_TOKEN="API_key" command. 
+There've been situations where applying the API key directly into the "cherry.tf" file was not detected by the Cherry Servers API, so in that case you may need to manually export the API key using "export CHERRY_AUTH_TOKEN="API_key" command. 
 
 # How to use
 
