@@ -1,5 +1,5 @@
 provider "cherryservers" { 
-     auth_token = "eyJhbGciOiJIUzI1NiIsInyI1X7lokw"
+     auth_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJjbGllbnRfaWQiOjE2ODA1LCJpYXQiOjE1NjQ2NTI2MDd9.549YLIlZfV8DQ5vdCthQJjEnzF78J8ch2vyI1X7lokw"
 }
 
 resource "cherryservers_project" "serverless_project" {
@@ -23,8 +23,9 @@ resource "cherryservers_server" "serverless-master-server" {
     ssh_keys_ids = ["${cherryservers_ssh.lukas.id}"]
 
     
-    provisioner "remote-exec" {
-      script = "install-docker.sh"
+    provisioner "file" {
+      source = "docker_ubuntu.deb"
+      destination = "/tmp/docker_ubuntu.deb"
   
       connection {
         type = "ssh"
@@ -47,6 +48,7 @@ resource "cherryservers_server" "serverless-master-server" {
 
     provisioner "remote-exec" {
       inline = [
+        "sudo dpkg -i /tmp/docker_ubuntu.deb; sudo apt install -f -y",
         "sudo apt -y install jq",
         "docker swarm init --advertise-addr ${cherryservers_server.serverless-master-server.primary_ip}"
       ]
@@ -74,8 +76,9 @@ resource "cherryservers_server" "serverless-worker-server" {
       host = "${cherryservers_server.serverless-worker-server.primary_ip}"
       private_key = file(var.private_key)
     }
-    provisioner "remote-exec" {
-      script = "install-docker.sh"
+    provisioner "file" {
+      source = "docker_ubuntu.deb"
+      destination = "/tmp/docker_ubuntu.deb"
     
     connection {
       type = "ssh"
@@ -86,8 +89,10 @@ resource "cherryservers_server" "serverless-worker-server" {
     }
     provisioner  "remote-exec" {
       inline = [
+        "sudo dpkg -i /tmp/docker_ubuntu.deb; sudo apt install -f -y",
         "sudo apt -y install jq",
         "docker swarm join --token ${data.external.swarm_join_token.result.worker} ${cherryservers_server.serverless-master-server.primary_ip}:2377"
+        
       ]
     connection {
        type = "ssh"
