@@ -77,8 +77,6 @@ outputs.tf
 README.md
 terraform
 terraform-provider-cherryservers
-terraform.tfstate
-terraform.tfstate.backup
 variables.tf
 ```
 Then, in the same directory, run the following commands
