@@ -81,7 +81,7 @@ terraform.tfstate
 terraform.tfstate.backup
 variables.tf
 ```
-
+Then, in the same directory, run the following commands
 ```
 ./terraform init
 ./terraform apply
