@@ -14,6 +14,8 @@ You will need a <a href="https://portal.cherryservers.com" target="_blank">cherr
 
 Create an API key at <a href="https://portal.cherryservers.com/#/settings/api-keys/" target="_blank">https://portal.cherryservers.com/#/settings/api-keys/</a> and enter it's value to "cherry.tf" file:<br>
 ```
+$ vim Downloads/CherryServers-Terraform-OpenFaaS-example-master/cherry.tf
+
 provider "cherryservers" { 
      auth_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9"
 }
@@ -21,6 +23,8 @@ provider "cherryservers" {
 
 The "variables.tf" file is self explanatory and should be edited accordingly. Download and run the <a href="https://github.com/cherryservers/cherryctl" target="_blank">cherryctl</a> script to get a list of server plan IDs.
 ```
+$ vim Downloads/CherryServers-Terraform-OpenFaaS-example-master/variables.tf
+
 # User Variables
 variable "region" {
   default = "EU-East-1"
