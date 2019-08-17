@@ -70,19 +70,24 @@ There've been situations where applying the API key directly into the "cherry.tf
 
 # How to use
 
-First and foremost, make sure that both "terraform" main script and CherryServers terraform module files are present in the working directory. 
+Before running Terraform, make sure you have the necessary files in the working directory
+ 
 ```
-$ ls -1
-cherry.tf
-docker-ce_17.12.0_ce-0_ubuntu_amd64.deb
-get-join-tokens.sh
-install-docker.sh
-install-openfaas.sh
-outputs.tf
-README.md
-terraform
-terraform-provider-cherryservers
-variables.tf
+Downloads/CherryServers-Terraform-OpenFaaS-example-master$ tree .
+.
+├── cherry.tf
+├── docker-ce_17.12.0_ce-0_ubuntu_amd64.deb
+├── get-join-tokens.sh
+├── install-docker.sh
+├── install-openfaas.sh
+├── outputs.tf
+├── README.md
+├── terraform
+├── terraform-provider-cherryservers
+└── variables.tf
+
+0 directories, 10 files
+
 ```
 Then, in the same directory, run the following commands
 ```
