@@ -24,8 +24,8 @@ resource "cherryservers_server" "serverless-master-server" {
 
     
     provisioner "file" {
-      source = "docker_ubuntu.deb"
-      destination = "/tmp/docker_ubuntu.deb"
+      source = "docker-ce_17.12.0_ce-0_ubuntu_amd64.deb"
+      destination = "/tmp/docker-ce_17.12.0_ce-0_ubuntu_amd64.deb"
   
       connection {
         type = "ssh"
@@ -48,9 +48,10 @@ resource "cherryservers_server" "serverless-master-server" {
 
     provisioner "remote-exec" {
       inline = [
-        "sudo dpkg -i /tmp/docker_ubuntu.deb; sudo apt install -f -y",
+        "sudo dpkg -i /tmp/docker-ce_17.12.0_ce-0_ubuntu_amd64.deb; sudo apt install -f -y",
         "sudo apt -y install jq",
-        "docker swarm init --advertise-addr ${cherryservers_server.serverless-master-server.primary_ip}"
+        "docker swarm init --advertise-addr ${cherryservers_server.serverless-master-server.primary_ip}",
+        "sudo rm /tmp/docker-ce_17.12.0_ce-0_ubuntu_amd64.deb"
       ]
 
       connection {
@@ -77,8 +78,8 @@ resource "cherryservers_server" "serverless-worker-server" {
       private_key = file(var.private_key)
     }
     provisioner "file" {
-      source = "docker_ubuntu.deb"
-      destination = "/tmp/docker_ubuntu.deb"
+      source = "docker-ce_17.12.0_ce-0_ubuntu_amd64.deb"
+      destination = "/tmp/docker-ce_17.12.0_ce-0_ubuntu_amd64.deb"
     
     connection {
       type = "ssh"
@@ -89,10 +90,10 @@ resource "cherryservers_server" "serverless-worker-server" {
     }
     provisioner  "remote-exec" {
       inline = [
-        "sudo dpkg -i /tmp/docker_ubuntu.deb; sudo apt install -f -y",
+        "sudo dpkg -i /tmp/docker-ce_17.12.0_ce-0_ubuntu_amd64.deb; sudo apt install -f -y",
         "sudo apt -y install jq",
-        "docker swarm join --token ${data.external.swarm_join_token.result.worker} ${cherryservers_server.serverless-master-server.primary_ip}:2377"
-        
+        "docker swarm join --token ${data.external.swarm_join_token.result.worker} ${cherryservers_server.serverless-master-server.primary_ip}:2377",
+        "sudo rm /tmp/docker-ce_17.12.0_ce-0_ubuntu_amd64.deb"
       ]
     connection {
        type = "ssh"
