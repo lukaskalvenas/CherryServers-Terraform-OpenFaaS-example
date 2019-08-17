@@ -54,6 +54,7 @@ resource "cherryservers_server" "serverless-worker-server" {
 Make sure that all bash scripts in the Terraform working directory have an "execute" flag:
 
 ```
+$ cd Downloads/CherryServers-Terraform-OpenFaaS-example-master
 sudo chmod +x *.sh
 sudo chmod +x terraform-provider-cherryservers
 ```
