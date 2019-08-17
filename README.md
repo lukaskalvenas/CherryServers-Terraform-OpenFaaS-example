@@ -78,7 +78,6 @@ Downloads/CherryServers-Terraform-OpenFaaS-example-master$ tree .
 ├── cherry.tf
 ├── docker-ce_17.12.0_ce-0_ubuntu_amd64.deb
 ├── get-join-tokens.sh
-├── install-docker.sh
 ├── install-openfaas.sh
 ├── outputs.tf
 ├── README.md
@@ -86,7 +85,7 @@ Downloads/CherryServers-Terraform-OpenFaaS-example-master$ tree .
 ├── terraform-provider-cherryservers
 └── variables.tf
 
-0 directories, 10 files
+0 directories, 9 files
 
 ```
 Then, in the same directory, run the following commands
