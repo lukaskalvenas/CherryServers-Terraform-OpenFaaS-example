@@ -39,7 +39,7 @@ variable "team_id" {
   default = "11682"
 }
 variable "plan_id" {
-  default = "94"
+  default = "161"
 }
 variable "private_key" {
   default = "~/.ssh/id_rsa"
