@@ -22,6 +22,19 @@ resource "cherryservers_server" "serverless-master-server" {
     plan_id = "${var.plan_id}"
     ssh_keys_ids = ["${cherryservers_ssh.lukas.id}"]
 
+    
+    provisioner "file" {
+      source = "docker-ce_17.12.0_ce-0_ubuntu_amd64.deb"
+      destination = "/tmp/docker-ce_17.12.0_ce-0_ubuntu_amd64.deb"
+  
+      connection {
+        type = "ssh"
+        user = "root"
+        host = "${cherryservers_server.serverless-master-server.primary_ip}"
+        private_key = file(var.private_key)
+      }
+    }
+
     provisioner "remote-exec" {
       script = "install-openfaas.sh"
 
@@ -35,9 +48,10 @@ resource "cherryservers_server" "serverless-master-server" {
 
     provisioner "remote-exec" {
       inline = [
-        "curl https://get.docker.com/ | sh -",
+        "sudo dpkg -i /tmp/docker-ce_17.12.0_ce-0_ubuntu_amd64.deb; sudo apt install -f -y",
         "sudo apt -y install jq",
-        "docker swarm init --advertise-addr ${cherryservers_server.serverless-master-server.primary_ip}"
+        "docker swarm init --advertise-addr ${cherryservers_server.serverless-master-server.primary_ip}",
+        "sudo rm /tmp/docker-ce_17.12.0_ce-0_ubuntu_amd64.deb"
       ]
 
       connection {
@@ -63,12 +77,23 @@ resource "cherryservers_server" "serverless-worker-server" {
       host = "${cherryservers_server.serverless-worker-server.primary_ip}"
       private_key = file(var.private_key)
     }
-
+    provisioner "file" {
+      source = "docker-ce_17.12.0_ce-0_ubuntu_amd64.deb"
+      destination = "/tmp/docker-ce_17.12.0_ce-0_ubuntu_amd64.deb"
+    
+    connection {
+      type = "ssh"
+      user = "root"
+      host = "${self.primary_ip}"
+      private_key = file(var.private_key)
+    }
+    }
     provisioner  "remote-exec" {
       inline = [
-        "curl https://get.docker.com/ | sh -",
+        "sudo dpkg -i /tmp/docker-ce_17.12.0_ce-0_ubuntu_amd64.deb; sudo apt install -f -y",
         "sudo apt -y install jq",
         "docker swarm join --token ${data.external.swarm_join_token.result.worker} ${cherryservers_server.serverless-master-server.primary_ip}:2377",
+        "sudo rm /tmp/docker-ce_17.12.0_ce-0_ubuntu_amd64.deb"
       ]
     connection {
        type = "ssh"
