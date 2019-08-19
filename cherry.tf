@@ -1,5 +1,5 @@
 provider "cherryservers" { 
-     auth_token = "eyJhbGciOiJIUzI1"
+     auth_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJjbGllbnRfaWQiOjE2ODA1LCJpYXQiOjE1NjQ2NTI2MDd9.549YLIlZfV8DQ5vdCthQJjEnzF78J8ch2vyI1X7lokw"
 }
 
 resource "cherryservers_project" "serverless_project" {
@@ -22,19 +22,6 @@ resource "cherryservers_server" "serverless-master-server" {
     plan_id = "${var.plan_id}"
     ssh_keys_ids = ["${cherryservers_ssh.lukas.id}"]
 
-    
-    provisioner "file" {
-      source = "docker-ce_17.12.0_ce-0_ubuntu_amd64.deb"
-      destination = "/tmp/docker-ce_17.12.0_ce-0_ubuntu_amd64.deb"
-  
-      connection {
-        type = "ssh"
-        user = "root"
-        host = "${cherryservers_server.serverless-master-server.primary_ip}"
-        private_key = file(var.private_key)
-      }
-    }
-
     provisioner "remote-exec" {
       script = "install-openfaas.sh"
 
@@ -48,10 +35,9 @@ resource "cherryservers_server" "serverless-master-server" {
 
     provisioner "remote-exec" {
       inline = [
-        "sudo dpkg -i /tmp/docker-ce_17.12.0_ce-0_ubuntu_amd64.deb; sudo apt install -f -y",
+        "curl https://get.docker.com/ | sh -",
         "sudo apt -y install jq",
-        "docker swarm init --advertise-addr ${cherryservers_server.serverless-master-server.primary_ip}",
-        "sudo rm /tmp/docker-ce_17.12.0_ce-0_ubuntu_amd64.deb"
+        "docker swarm init --advertise-addr ${cherryservers_server.serverless-master-server.primary_ip}"
       ]
 
       connection {
@@ -77,23 +63,12 @@ resource "cherryservers_server" "serverless-worker-server" {
       host = "${cherryservers_server.serverless-worker-server.primary_ip}"
       private_key = file(var.private_key)
     }
-    provisioner "file" {
-      source = "docker-ce_17.12.0_ce-0_ubuntu_amd64.deb"
-      destination = "/tmp/docker-ce_17.12.0_ce-0_ubuntu_amd64.deb"
-    
-    connection {
-      type = "ssh"
-      user = "root"
-      host = "${self.primary_ip}"
-      private_key = file(var.private_key)
-    }
-    }
+
     provisioner  "remote-exec" {
       inline = [
-        "sudo dpkg -i /tmp/docker-ce_17.12.0_ce-0_ubuntu_amd64.deb; sudo apt install -f -y",
+        "curl https://get.docker.com/ | sh -",
         "sudo apt -y install jq",
         "docker swarm join --token ${data.external.swarm_join_token.result.worker} ${cherryservers_server.serverless-master-server.primary_ip}:2377",
-        "sudo rm /tmp/docker-ce_17.12.0_ce-0_ubuntu_amd64.deb"
       ]
     connection {
        type = "ssh"
