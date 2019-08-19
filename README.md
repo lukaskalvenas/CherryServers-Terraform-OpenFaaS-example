@@ -3,7 +3,6 @@
 This example will use Ubuntu as the base operating system to deploy one master node and a user-specified amount (e.g. three) worker nodes on Docker swarm. Those will then automatically join the master node via public IP address and Docker swarm token combination. 
 # Requirements
 <ul>
-  <li><a href="https://download.docker.com/linux/ubuntu/dists/zesty/pool/stable/amd64/docker-ce_17.12.0~ce-0~ubuntu_amd64.deb" target="_blank">Docker CE.</a> Donwload the file into Terraform's working directory.</li>
   <li><a href="https://www.terraform.io/downloads.html" target="_blank">Terraform 0.12.6</a> Copy it to Terraform's working  directory.</li>
   <li><a href="http://downloads.cherryservers.com/other/terraform/" target="_blank">CherryServers Terraform module</a> Copy it to the working Terraform directory.</li>
   <li><a href="https://stedolan.github.io/jq/download/" target="_blank">JQ package for the host PC/laptop</a></li>
@@ -76,7 +75,6 @@ Before running Terraform, make sure you have the necessary files in the working 
 Downloads/CherryServers-Terraform-OpenFaaS-example-master$ tree .
 .
 ├── cherry.tf
-├── docker-ce_17.12.0_ce-0_ubuntu_amd64.deb
 ├── get-join-tokens.sh
 ├── install-openfaas.sh
 ├── outputs.tf
@@ -85,7 +83,7 @@ Downloads/CherryServers-Terraform-OpenFaaS-example-master$ tree .
 ├── terraform-provider-cherryservers
 └── variables.tf
 
-0 directories, 9 files
+0 directories, 8 files
 
 ```
 Then, in the same directory, run the following commands
