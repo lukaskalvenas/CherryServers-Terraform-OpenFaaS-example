@@ -1,5 +1,5 @@
 provider "cherryservers" { 
-     auth_token = "eyJhbGciOiJIUzI1"
+     auth_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJjbGllbnRfaWQiOjE2ODA1LCJpYXQiOjE1NjYyMjIyMDB9.yVSsjkvPzdnrp-fyb7Ai86j9pCrzCGphUIkN8Vd4i8o"
 }
 
 resource "cherryservers_project" "serverless_project" {
@@ -34,18 +34,6 @@ resource "cherryservers_server" "serverless-master-server" {
         private_key = file(var.private_key)
       }
     }
-
-    provisioner "remote-exec" {
-      script = "install-openfaas.sh"
-
-      connection {
-        type = "ssh"
-        user = "root"
-        host = "${cherryservers_server.serverless-master-server.primary_ip}"
-        private_key = file(var.private_key)
-      }
-    }
-
     provisioner "remote-exec" {
       inline = [
         "sudo dpkg -i /tmp/docker-ce_17.12.0_ce-0_ubuntu_amd64.deb; sudo apt install -f -y",
@@ -61,6 +49,19 @@ resource "cherryservers_server" "serverless-master-server" {
         private_key = file(var.private_key)
       }
     }
+    
+    provisioner "remote-exec" {
+      script = "install-openfaas.sh"
+
+      connection {
+        type = "ssh"
+        user = "root"
+        host = "${cherryservers_server.serverless-master-server.primary_ip}"
+        private_key = file(var.private_key)
+      }
+    }
+
+
 }
 ################ Worker server ################
 resource "cherryservers_server" "serverless-worker-server" {
