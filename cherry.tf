@@ -1,5 +1,5 @@
 provider "cherryservers" { 
-     auth_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJjbGllbnRfaWQiOjE2ODA1LCJpYXQiOjE1NjYyMjIyMDB9.yVSsjkvPzdnrp-fyb7Ai86j9pCrzCGphUIkN8Vd4i8o"
+     auth_token = "eyJhbGciOiJIUzI1N"
 }
 
 resource "cherryservers_project" "serverless_project" {
