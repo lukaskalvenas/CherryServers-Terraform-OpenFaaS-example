@@ -100,7 +100,11 @@ The full process may take up to 20 minutes to complete.
 
 It will first deploy the master node and register all the necessary variables. Once that's done, the specified amount of worker servers will follow to deploy.
 
-The worker servers will then be automatically added to the Docker swarm. When the playbook finishes, log into the master node, change the working directory to "~/faas" and run the "deploy_stack.sh" script.
+The worker servers will then be automatically added to the Docker swarm. When the playbook finishes, log into the master node, change the working directory to "~/faas" and run the following commands
+```
+git checkout 0.8.9
+./deploy_stack.sh
+```
 
 This will install the default OpenFaaS function stack for you. Use the provided login credentials to access the master GUI control panel at http://$master_ip:8080 and begin working.
 
