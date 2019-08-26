@@ -106,7 +106,7 @@ git checkout 0.8.9
 ./deploy_stack.sh
 ```
 
-This will install the default OpenFaaS function stack for you. Use the provided login credentials to access the master GUI control panel at http://$master_ip:8080 and begin working.
+This will install the default OpenFaaS function stack for you. Use the provided login credentials to access the master GUI control panel at http://$master_ip:8080 and begin working. Alternatively, you can use the OpenFaaS CLI tools to perform the tasks from the terminal.
 
 Good luck!
 
