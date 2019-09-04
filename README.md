@@ -54,11 +54,12 @@ resource "cherryservers_server" "serverless-worker-server" {
     count = 3
 .....
 ```
-Make sure that CherryServers Terraform module in the Terraform working directory has an "execute" flag:
+Make sure that CherryServers Terraform module and "get-join-tokens.sh" script in the Terraform working directory have an "execute" flag:
 
 ```
 $ cd Downloads/CherryServers-Terraform-OpenFaaS-example-master
 sudo chmod +x terraform-provider-cherryservers
+sudo chmod +x get-join-tokens.sh
 ```
 
 Last, but not least, check https://portal.cherryservers.com/#/settings/ssh-keys if you don't alredy have an SSH key with the same tag (name) uploaded or if there isn't already a project with the same name created at https://portal.cherryservers.com/#/projects, in which case Terraform will not run. Delete any duplicated SSH keys and/or projects and then run the task.
