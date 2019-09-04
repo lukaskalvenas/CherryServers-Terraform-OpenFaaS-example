@@ -54,13 +54,13 @@ resource "cherryservers_server" "serverless-worker-server" {
     count = 3
 .....
 ```
-Make sure that all bash scripts in the Terraform working directory have an "execute" flag:
+Make sure that CherryServers Terraform module in the Terraform working directory has an "execute" flag:
 
 ```
 $ cd Downloads/CherryServers-Terraform-OpenFaaS-example-master
-sudo chmod +x *.sh
 sudo chmod +x terraform-provider-cherryservers
 ```
+
 Last, but not least, check https://portal.cherryservers.com/#/settings/ssh-keys if you don't alredy have an SSH key with the same tag (name) uploaded or if there isn't already a project with the same name created at https://portal.cherryservers.com/#/projects, in which case Terraform will not run. Delete any duplicated SSH keys and/or projects and then run the task.
 
 # Important
@@ -75,17 +75,14 @@ Before running Terraform, make sure you have the necessary files in the working 
 Downloads/CherryServers-Terraform-OpenFaaS-example-master$ tree .
 .
 ├── cherry.tf
-├── docker-ce_17.12.0_ce-0_ubuntu_amd64.deb
 ├── get-join-tokens.sh
-├── install-openfaas.sh
 ├── outputs.tf
 ├── README.md
 ├── terraform
 ├── terraform-provider-cherryservers
 └── variables.tf
 
-0 directories, 9 files
-
+0 directories, 7 files
 
 ```
 Then, in the same directory, run the following commands
