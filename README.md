@@ -9,7 +9,7 @@ This example will use Ubuntu as the base operating system to deploy one master n
 </ul>
 
 # Before you start
-You will need a <a href="https://portal.cherryservers.com" target="_blank">cherrservers account</a> with credit in balance to order services with hourly billing. 
+You will need a <a href="https://portal.cherryservers.com" target="_blank">Cherry Servers account</a> with credit in balance to order services with hourly billing. 
 
 Create an API key at <a href="https://portal.cherryservers.com/#/settings/api-keys/" target="_blank">https://portal.cherryservers.com/#/settings/api-keys/</a> and enter it's value to "cherry.tf" file:<br>
 ```
