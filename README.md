@@ -1,4 +1,3 @@
-![Cherry Servers](https://www.serchen.com/images/thumbnails/large/54097.jpg) 
 # CherryServers-Terraform-OpenFaaS-example
 This example will use Ubuntu as the base operating system to deploy one master node and a user-specified amount (e.g. three) worker nodes on Docker swarm. Those will then automatically join the master node via public IP address and Docker swarm token combination. 
 # Requirements
