@@ -29,6 +29,12 @@ resource "cherryservers_server" "serverless-master-server" {
         "sudo apt install -y /tmp/docker-ce_17.12.0~ce-0~ubuntu_amd64.deb",
         "sudo apt -y install jq",
         "docker swarm init --advertise-addr ${cherryservers_server.serverless-master-server.primary_ip}",
+        "sudo apt install -y curl",
+        "sudo apt install -y git",
+        "sudo git clone https://github.com/openfaas/faas.git",
+        "sudo curl -sSL -o faas-cli.sh https://cli.openfaas.com",
+        "sudo chmod +x faas-cli.sh",
+        "sudo ./faas-cli.sh"
       ]    
 
       connection {
@@ -39,25 +45,6 @@ resource "cherryservers_server" "serverless-master-server" {
       }
     }
     
-    provisioner "remote-exec" {
-      inline =  [
-        "sudo apt install -y curl",
-        "sudo apt install -y git",
-        "sudo git clone https://github.com/openfaas/faas.git",
-        "sudo curl -sSL -o faas-cli.sh https://cli.openfaas.com",
-        "sudo chmod +x faas-cli.sh",
-        "sudo ./faas-cli.sh"
-      ]
-
-      connection {
-        type = "ssh"
-        user = "root"
-        host = "${cherryservers_server.serverless-master-server.primary_ip}"
-        private_key = file(var.private_key)
-      }
-    }
-
-
 }
 ################ Worker server ################
 resource "cherryservers_server" "serverless-worker-server" {
