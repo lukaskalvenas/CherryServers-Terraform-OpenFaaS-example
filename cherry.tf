@@ -31,6 +31,7 @@ resource "cherryservers_server" "serverless-master-server" {
         "docker swarm init --advertise-addr ${cherryservers_server.serverless-master-server.primary_ip}",
         "sudo apt install -y curl",
         "sudo apt install -y git",
+        "cd ~",   
         "sudo git clone https://github.com/openfaas/faas.git",
         "sudo curl -sSL -o faas-cli.sh https://cli.openfaas.com",
         "sudo chmod +x faas-cli.sh",
