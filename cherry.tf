@@ -62,7 +62,6 @@ resource "cherryservers_server" "serverless-worker-server" {
 
     provisioner  "remote-exec" {
       inline = [
-        "while sudo fuser /var/lib/dpkg/lock >/dev/null 2>&1; do sleep 1; done;",
         "cd /tmp",
         "wget https://download.docker.com/linux/ubuntu/dists/zesty/pool/stable/amd64/docker-ce_17.12.0~ce-0~ubuntu_amd64.deb",
         "sudo DEBIAN_FRONTEND=noninteractive apt-get install -y /tmp/docker-ce_17.12.0~ce-0~ubuntu_amd64.deb jq",
