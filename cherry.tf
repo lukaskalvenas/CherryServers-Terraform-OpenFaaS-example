@@ -1,5 +1,5 @@
 provider "cherryservers" { 
-     auth_token = "eyJhbGciOiJIUzI"
+     auth_token = "eyJhbGciO"
 }
 
 resource "cherryservers_project" "serverless_project" {
@@ -26,10 +26,8 @@ resource "cherryservers_server" "serverless-master-server" {
       inline = [
         "cd /tmp",
         "wget https://download.docker.com/linux/ubuntu/dists/zesty/pool/stable/amd64/docker-ce_17.12.0~ce-0~ubuntu_amd64.deb",
-        "sudo apt install -y /tmp/docker-ce_17.12.0~ce-0~ubuntu_amd64.deb",
+        "sudo DEBIAN_FRONTEND=noninteractive apt install -y /tmp/docker-ce_17.12.0~ce-0~ubuntu_amd64.deb curl git jq",
         "docker swarm init --advertise-addr ${cherryservers_server.serverless-master-server.primary_ip}",
-        "sudo apt install -y curl",
-        "sudo apt install -y git",
         "cd ~",   
         "sudo git clone https://github.com/openfaas/faas.git",
         "sudo curl -sSL -o faas-cli.sh https://cli.openfaas.com",
@@ -64,9 +62,10 @@ resource "cherryservers_server" "serverless-worker-server" {
 
     provisioner  "remote-exec" {
       inline = [
+        "while sudo fuser /var/lib/dpkg/lock >/dev/null 2>&1; do sleep 1; done;",
         "cd /tmp",
         "wget https://download.docker.com/linux/ubuntu/dists/zesty/pool/stable/amd64/docker-ce_17.12.0~ce-0~ubuntu_amd64.deb",
-        "sudo apt install -y /tmp/docker-ce_17.12.0~ce-0~ubuntu_amd64.deb",
+        "sudo DEBIAN_FRONTEND=noninteractive apt-get install -y /tmp/docker-ce_17.12.0~ce-0~ubuntu_amd64.deb jq",
         "docker swarm join --token ${data.external.swarm_join_token.result.worker} ${cherryservers_server.serverless-master-server.primary_ip}:2377",
       ]
     connection {
