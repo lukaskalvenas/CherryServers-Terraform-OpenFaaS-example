@@ -72,17 +72,15 @@ There've been situations where applying the API key directly into the "cherry.tf
 Before running Terraform, make sure you have the necessary files in the working directory
  
 ```
-Downloads/CherryServers-Terraform-OpenFaaS-example-master$ tree .
-.
-├── cherry.tf
-├── get-join-tokens.sh
-├── outputs.tf
-├── README.md
-├── terraform
-├── terraform-provider-cherryservers
-└── variables.tf
+Downloads/CherryServers-Terraform-OpenFaaS-example-master$ ls -1
 
-0 directories, 7 files
+cherry.tf
+get-join-tokens.sh
+outputs.tf
+README.md
+terraform
+terraform-provider-cherryservers
+variables.tf
 
 ```
 Then, in the same directory, run the following commands
