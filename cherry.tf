@@ -7,7 +7,7 @@ resource "cherryservers_project" "serverless_project" {
     name = "${var.project_name}"
 }
 
-resource "cherryservers_ssh" "openfaas_terraform" {
+resource "cherryservers_ssh" "lukas_openfaas" {
     name = "openfaas_terraform"
     public_key = file(var.public_key)
 }
@@ -20,7 +20,7 @@ resource "cherryservers_server" "serverless-master-server" {
     hostname = "serverless-master-server"
     image = "${var.image}"
     plan_id = "${var.plan_id}"
-    ssh_keys_ids = ["${cherryservers_ssh.openfaas_terraform.id}"]
+    ssh_keys_ids = ["${cherryservers_ssh.lukas_openfaas.id}"]
     
     provisioner "remote-exec" {
       inline = [
@@ -52,7 +52,7 @@ resource "cherryservers_server" "serverless-worker-server" {
     hostname = "serverless-worker-server${count.index}"
     image = "${var.image}"
     plan_id = "${var.plan_id}"
-    ssh_keys_ids = ["${cherryservers_ssh.lukas.id}"]
+    ssh_keys_ids = ["${cherryservers_ssh.lukas_openfaas.id}"]
     connection {
       type = "ssh"
       user = "root"
