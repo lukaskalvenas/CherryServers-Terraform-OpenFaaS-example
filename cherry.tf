@@ -20,7 +20,7 @@ resource "cherryservers_server" "serverless-master-server" {
     hostname = "serverless-master-server"
     image = "${var.image}"
     plan_id = "${var.plan_id}"
-    ssh_keys_ids = ["${cherryservers_ssh.lukas.id}"]
+    ssh_keys_ids = ["${cherryservers_ssh.openfaas_terraform.id}"]
     
     provisioner "remote-exec" {
       inline = [
