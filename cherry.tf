@@ -7,8 +7,8 @@ resource "cherryservers_project" "serverless_project" {
     name = "${var.project_name}"
 }
 
-resource "cherryservers_ssh" "lukas" {
-    name = "lukas"
+resource "cherryservers_ssh" "openfaas_terraform" {
+    name = "openfaas_terraform"
     public_key = file(var.public_key)
 }
 
