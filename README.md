@@ -80,9 +80,10 @@ Downloads/CherryServers-Terraform-OpenFaaS-example-master$ tree .
 ├── README.md
 ├── terraform
 ├── terraform-provider-cherryservers
-└── variables.tf
+├── variables.tf
+└── versions.tf
 
-0 directories, 7 files
+0 directories, 8 files
 
 ```
 Then, in the same directory, run the following commands
