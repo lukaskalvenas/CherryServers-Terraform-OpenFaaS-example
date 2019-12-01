@@ -1,5 +1,6 @@
 provider "cherryservers" {
-  auth_token = "eyJhbGciOi"
+  auth_token = "eyJhbGciO"
+  version = "~> 1.0"
 }
 
 resource "cherryservers_project" "serverless_project" {
@@ -7,9 +8,9 @@ resource "cherryservers_project" "serverless_project" {
   name    = var.project_name
 }
 
-resource "cherryservers_ssh" "lukas_openfaas" {
-  name       = "openfaas_terraform"
-  public_key = "file(var.public_key)"
+resource "cherryservers_ssh" "lukas_ssh" {
+  name = "lukas"
+  public_key = file(var.public_key)
 }
 
 ################ Master server creation ################
@@ -20,7 +21,7 @@ resource "cherryservers_server" "serverless-master-server" {
   hostname     = "serverless-master-server"
   image        = var.image
   plan_id      = var.plan_id
-  ssh_keys_ids = [cherryservers_ssh.lukas_openfaas.id]
+  ssh_keys_ids = [cherryservers_ssh.lukas_ssh.id]
 
   provisioner "remote-exec" {
     inline = [
@@ -39,7 +40,7 @@ resource "cherryservers_server" "serverless-master-server" {
       type        = "ssh"
       user        = "root"
       host        = cherryservers_server.serverless-master-server.primary_ip
-      private_key = "file(var.private_key)"
+      private_key = file(var.private_key)
     }
   }
 }
@@ -52,12 +53,12 @@ resource "cherryservers_server" "serverless-worker-server" {
   hostname     = "serverless-worker-server${count.index}"
   image        = var.image
   plan_id      = var.plan_id
-  ssh_keys_ids = [cherryservers_ssh.lukas_openfaas.id]
+  ssh_keys_ids = [cherryservers_ssh.lukas_ssh.id]
   connection {
     type        = "ssh"
     user        = "root"
     host        = cherryservers_server.serverless-worker-server[0].primary_ip
-    private_key = "file(var.private_key)"
+    private_key = file(var.private_key)
   }
 
   provisioner "remote-exec" {
@@ -71,7 +72,7 @@ resource "cherryservers_server" "serverless-worker-server" {
       type        = "ssh"
       user        = "root"
       host        = self.primary_ip
-      private_key = "file(var.private_key)"
+      private_key = file(var.private_key)
     }
   }
 }
