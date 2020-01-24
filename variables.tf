@@ -4,7 +4,7 @@ variable "region" {
 }
 
 variable "image" {
-  default = "Ubuntu 16.04 64bit"
+  default = "Ubuntu 18.04 64bit"
 }
 
 variable "project_name" {
