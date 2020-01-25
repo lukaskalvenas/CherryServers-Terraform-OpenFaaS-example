@@ -99,6 +99,7 @@ It will first deploy the master node and register all the necessary variables. O
 
 The worker servers will then be automatically added to the Docker swarm. When the playbook finishes, log into the master node, change the working directory to "~/faas" and run the following commands
 ```
+cd ~/faas
 git checkout 0.8.9
 ./deploy_stack.sh
 ```
